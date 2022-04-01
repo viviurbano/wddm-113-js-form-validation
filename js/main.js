@@ -1,5 +1,6 @@
 "use strict";
 
+// immediatally invoked functions
 // (function () {
 //   /* ... */
 // })();
@@ -25,26 +26,32 @@ function checkInputs() {
   console.log(usernameValue);
   console.log(passwordValue);
   console.log(password2Value);
+  console.log("---------------");
 
-  if (usernameValue === "" || usernameValue.length < 2) {
+  // username validation
+  if (usernameValue === "") {
     setError(username, "Error: username cannot be empty");
+  } else if (usernameValue.length < 4) {
+    setError(username, "Error: username must contain at least 4 characters");
   } else {
     setSuccess(username);
   }
 
+  // password validation
   if (passwordValue === "") {
     setError(password, "Error: password cannot be empty");
+  } else if (passwordValue.length < 5) {
+    setError(password, "Error: password must contain at least 5 characters");
+  } else {
+    setSuccess(password);
   }
-  // else {
-  //   setSuccess(password);
-  // }
-
+  // password match
   if (password2Value === "") {
-    setError(password2, "Please, retype the password");
+    setError(password2, "Please, confirm the password");
   } else if (passwordValue !== password2Value) {
     setError(password2, "Passwords don't match");
   } else {
-    setSuccess(password && password2);
+    setSuccess(password2);
   }
 }
 
@@ -59,5 +66,3 @@ function setSuccess(input) {
   const formControl = input.parentElement;
   formControl.className = "form-control success";
 }
-
-// immediatally invoked functions
